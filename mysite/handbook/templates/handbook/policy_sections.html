@@ -1,0 +1,25 @@
+{% extends "handbook/base_generic.html" %}
+
+{% block title %}
+Policy Sections
+{% endblock %}
+
+{% block content %}
+<h1>Policy Sections</h1>
+<ul>
+    {% for section in sections %}
+        <li>
+            <h3>
+                <a href="{% url 'handbook:section' section.number %}">
+                    {{ section.number }} - {{ section.title }}
+                </a>
+            </h3>
+            <ul>
+                {% for policy in section.policies.all %}
+                    <li>{{ policy.number }} - {{ policy.title }}</li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

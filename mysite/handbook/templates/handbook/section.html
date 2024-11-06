@@ -1,0 +1,62 @@
+{% extends "handbook/base_generic.html" %}
+
+{% block title %}
+Section {{ section.number }}
+{% endblock %}
+
+{% block content %}
+<h1>{{ section.number }} - {{ section.title }}</h1>
+<p>{{ section.description }}</p>
+
+<nav>
+    <h5>Jump to a Policy:</h5>
+    <ul>
+        {% for policy in policies %}
+            <li><a href="#policy-{{ policy.number }}">{{ policy.number }} {{ policy.title }}</a></li>
+        {% endfor %}
+    </ul>
+</nav>
+
+<hr>
+
+{% for policy in policies %}
+<article id="policy-{{ policy.number }}">
+    <h2>{{ policy.number }} {{ policy.title }}</h2>
+
+    <h3>Purpose</h3>
+    <p>{{ policy.purpose }}</p>
+
+    <h3>Scope</h3>
+    <p>{{ policy.scope }}</p>
+
+    <h3>Definitions</h3>
+    <ul>
+        {% for definition in policy.definitions.all %}
+            <li><strong>{{ definition.term }}:</strong> {{ definition.definition }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Policy Statements</h3>
+    <p>{{ policy.policy_statements }}</p>
+
+    <h3>Responsibilities</h3>
+    <p>{{ policy.responsibilities }}</p>
+
+    <h3>Procedures</h3>
+    <p>{{ policy.procedures }}</p>
+
+    <h3>Related Policies</h3>
+    <ul>
+        {% for related_policy in policy.related_policies.all %}
+            <li>{{ related_policy.number }} {{ related_policy.title }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>Policy Owner: {{ policy.policy_owner }}</p>
+    <p>Version: {{ policy.version }}</p>
+    <p>Created On: {{ policy.pub_date }}</p>
+
+    <hr>
+</article>
+{% endfor %}
+{% endblock %}

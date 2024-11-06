@@ -1,0 +1,13 @@
+{% extends "handbook/base_generic.html" %}
+
+{% block title %}
+Welcome
+{% endblock %}
+
+{% block content %}
+<div>
+    <h1>Welcome to the Policy Handbook</h1>
+    <p>Your guide to understanding company policies and procedures.</p>
+    <a href="{% url 'handbook:policy_sections' %}" class="btn btn-primary">Explore Policies</a>
+</div>
+{% endblock %}
