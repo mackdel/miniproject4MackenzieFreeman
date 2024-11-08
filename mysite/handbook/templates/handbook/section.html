@@ -57,7 +57,11 @@
             </div>
             <div class="mb-3">
                 <strong>Procedures:</strong>
-                <p>{{ policy.procedures }}</p>
+                <ol>
+                    {% for step in policy.procedure_steps.all %}
+                    <li>{{ step.description }}</li>
+                    {% endfor %}
+                </ol>
             </div>
             <div class="mb-3">
                 <strong>Policy Owner:</strong>

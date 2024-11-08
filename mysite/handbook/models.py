@@ -32,6 +32,10 @@ class PolicySection(models.Model):
                 policy.number = f"{section_prefix}.{index}"
                 policy.save()
 
+    class Meta:
+        verbose_name = "Policy Section"  # Singular form
+        verbose_name_plural = "Policy Sections"  # Plural form
+
 
 # Represents individual policies within sections, with detailed fields
 class Policy(models.Model):
@@ -84,6 +88,21 @@ class Policy(models.Model):
             self.number = f"{section_prefix}.{policy_count + 1}"
         super().save(*args, **kwargs)
 
+    class Meta:
+        verbose_name = "Policy"  # Singular form
+        verbose_name_plural = "Policies"  # Plural form
+
+# Represents individual procedure steps linked to a policy
+class ProcedureStep(models.Model):
+    policy = models.ForeignKey('Policy', on_delete=models.CASCADE, related_name='procedure_steps')
+    step_number = models.PositiveIntegerField()  # For ordering steps
+    description = models.TextField()
+
+    class Meta:
+        ordering = ['step_number']  # Steps will be ordered by their step number
+
+    def __str__(self):
+        return f"Step {self.step_number}: {self.description[:50]}"
 
 # Represents definitions linked to policies
 class Definition(models.Model):
@@ -92,6 +111,10 @@ class Definition(models.Model):
 
     def __str__(self):
         return f"{self.term}: {self.definition[:50]}..."
+
+    class Meta:
+        verbose_name = "Definition"  # Singular form
+        verbose_name_plural = "Definitions"  # Plural form
 
 # Represents request forms on each policy
 class PolicyRequest(models.Model):
@@ -105,3 +128,7 @@ class PolicyRequest(models.Model):
 
     def __str__(self):
         return f"Request for {self.policy.title} by {self.name or 'Anonymous'}"
+
+    class Meta:
+        verbose_name = "Policy Request"  # Singular form
+        verbose_name_plural = "Policy Requests"  # Plural form

@@ -43,22 +43,28 @@ To start the application and run it locally, use the command:
 ```
 python manage.py runserver
 ```
-Once the server is running, you can access the app by visiting http://127.0.0.1:8000/handbook in your web browser.
-You can access the admin page by visiting http://127.0.0.1:8000/admin in your web browser.
+Access the application at:
+* Handbook: Visit http://127.0.0.1:8000/handbook in your web browser.
+* Admin: Visit http://127.0.0.1:8000/admin in your web browser.
 
 ## Features
 
+### User Features
 * Home Page: Welcomes users and introduces the handbook.
-* Policy List Page: Displays all available policies in a list view.
-* Policy Detail Page: Shows detailed information for a selected policy.
-* Request Form Page: Allows users to submit questions or clarification requests on policies.
-* User Profile Page: Users can personalize this page and save favorite policies.
-
+* Policy Section List Page: Displays a list of all policy sections.
+* Section Page: Shows detailed policies for the selected section.
+* Request Form Page: Allows users to submit questions or requests for clarification on policies.
+* Login/Register Pages: Allows user to login or create an account to view handbook.
+* 
+### Admin Features
+* Policy Management: Add, edit, and manage policies.
+* Policy Request Management: Track and resolve user-submitted requests.
+* Section Management: Define and manage policy sections.
 
 ## Help
 
 Common issues and troubleshooting:
-* If migrations fail, ensure your database server is running and try rerunning the migration commands.
+* Database Migrations: Ensure the database server is running if migrations fail, then retry makemigrations and migrate.
 
 ## Authors
 
@@ -70,6 +76,6 @@ Mackenzie Freeman
 Inspiration, code snippets, etc.
 * [Django Tutorial](https://docs.djangoproject.com/en/4.2/intro/tutorial01/)
 * [Django Docs](https://docs.djangoproject.com/en/5.1/)
-* [ChatGPT]( )
+* [ChatGPT](https://chatgpt.com/share/672e6f74-59dc-800b-b531-281963cffbb1)
 * [BootStrap Docs](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 * [LearnDjango](https://learndjango.com/tutorials/django-login-and-logout-tutorial)
