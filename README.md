@@ -68,5 +68,7 @@ Mackenzie Freeman
 
 Inspiration, code snippets, etc.
 * [Django Tutorial](https://docs.djangoproject.com/en/4.2/intro/tutorial01/)
+* [Django Docs](https://docs.djangoproject.com/en/5.1/)
 * [ChatGPT]( )
 * [BootStrap Docs](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
+* [LearnDjango](https://learndjango.com/tutorials/django-login-and-logout-tutorial)

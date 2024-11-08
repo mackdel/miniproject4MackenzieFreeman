@@ -1,0 +1,13 @@
+{% extends "handbook/base_generic.html" %}
+
+{% block title %}
+Logged Out
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>You Have Logged Out</h1>
+    <p>You have successfully logged out. To log in again, click the button below:</p>
+    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+</div>
+{% endblock %}

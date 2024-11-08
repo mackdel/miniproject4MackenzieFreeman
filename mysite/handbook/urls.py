@@ -1,12 +1,18 @@
 from django.urls import path
+from .views import (
+    IndexView,
+    PolicySectionsView,
+    SectionDetailView,
+    PolicyRequestFormView,
+    RequestSuccessView,
+)
 
-from . import views
+app_name = "handbook"
 
-app_name = 'handbook'
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('policy_sections/', views.policy_sections, name='policy_sections'),
-    path('section/<str:section_number>/', views.section, name='section'),
-    path('policy/<str:policy_number>/', views.request_form, name='request_form'),
-    path('request_success/', views.request_success, name='request_success'),
+    path("", IndexView.as_view(), name="index"),
+    path("policy_sections/", PolicySectionsView.as_view(), name="policy_sections"),
+    path("section/<str:section_number>/", SectionDetailView.as_view(), name="section"),
+    path("policy/<str:policy_number>/", PolicyRequestFormView.as_view(), name="request_form"),
+    path("request_success/", RequestSuccessView.as_view(), name="request_success"),
 ]
