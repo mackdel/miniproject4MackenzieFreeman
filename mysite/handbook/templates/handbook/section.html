@@ -45,6 +45,13 @@ Section {{ section.number }}
     <h3>Procedures</h3>
     <p>{{ policy.procedures }}</p>
 
+    <h3>Forms</h3>
+    <p>
+        <a href="{% url 'handbook:request_form' policy.number %}">
+            Submit a Question or Clarification
+        </a>
+    </p>
+
     <h3>Related Policies</h3>
     <ul>
         {% for related_policy in policy.related_policies.all %}

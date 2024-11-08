@@ -1,0 +1,17 @@
+{% extends "handbook/base_generic.html" %}
+
+{% block title %}
+    Form for {{ policy.number }} {{ policy.title }}
+{% endblock %}
+
+{% block content %}
+<h1>Submit a Question for Policy {{ policy.number }} - {{ policy.title }}</h1>
+
+<p>Fill out the form below to ask a question or request clarification regarding this policy.</p>
+
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="">Submit</button>
+</form>
+{% endblock %}

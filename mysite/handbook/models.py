@@ -92,3 +92,16 @@ class Definition(models.Model):
 
     def __str__(self):
         return f"{self.term}: {self.definition[:50]}..."
+
+# Represents request forms on each policy
+class PolicyRequest(models.Model):
+    policy = models.ForeignKey('Policy', on_delete=models.CASCADE, related_name='requests')
+    name = models.CharField(max_length=100, blank=True, null=True)  # Allows anonymous submissions
+    email = models.EmailField()
+    question = models.TextField()
+    submitted_at = models.DateTimeField(auto_now_add=True)
+    is_resolved = models.BooleanField(default=False)  # Tracks whether the request has been addressed
+    admin_notes = models.TextField(blank=True, null=True)  # Admin can add follow-up notes
+
+    def __str__(self):
+        return f"Request for {self.policy.title} by {self.name or 'Anonymous'}"
