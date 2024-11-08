@@ -1,16 +1,58 @@
-{% extends "handbook/base_generic.html" %}
+{% extends "handbook/base.html" %}
 
 {% block title %}
-Register
+    Register
 {% endblock %}
 
-
 {% block content %}
-<h1>Register</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-</form>
-<p>Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <!-- Header Section -->
+            <div class="text-center">
+                <h1 class="display-5 mb-3">Register</h1>
+                <p class="text-muted">Create an account to access the Employee Handbook.</p>
+            </div>
+
+            <!-- Registration Form -->
+            <form method="post" novalidate class="bg-light p-4 rounded shadow-sm">
+                {% csrf_token %}
+                <div class="mb-3 row">
+                    <label for="id_username" class="form-label">Username</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <div class="text-danger small">{{ form.username.errors|striptags }}</div>
+                    {% endif %}
+                </div>
+                <div class="mb-3 row">
+                    <label for="id_password1" class="form-label">Password</label>
+                    {{ form.password1 }}
+                    {% if form.password1.errors %}
+                        <div class="text-danger small">{{ form.password1.errors|striptags }}</div>
+                    {% endif %}
+                    <small class="form-text text-muted">
+                        Your password must contain at least 8 characters and cannot be entirely numeric or too common.
+                    </small>
+                </div>
+                <div class="mb-3 row">
+                    <label for="id_password2" class="form-label">Confirm Password</label>
+                    {{ form.password2 }}
+                    {% if form.password2.errors %}
+                        <div class="text-danger small">{{ form.password2.errors|striptags }}</div>
+                    {% endif %}
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+
+            <!-- Login Link -->
+            <div class="text-center mt-3">
+                <p class="text-muted">Already have an account?
+                    <a href="{% url 'login' %}" class="fw-semibold">Login here</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import FormView
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponseRedirect
 from .models import PolicySection, Policy
 from .forms import PolicyRequestForm
 
@@ -43,13 +44,14 @@ class PolicyRequestFormView(LoginRequiredMixin, FormView):
     template_name = "handbook/request_form.html"
 
     def get_success_url(self):
-        # Redirect to the success page after form submission
-        return reverse("handbook:request_success")
+        # Stay on the same page but pass success=True as a GET parameter
+        return reverse("handbook:request_form", kwargs={'policy_number': self.kwargs['policy_number']})
 
     def get_context_data(self, **kwargs):
         # Add the related policy to the context
         context = super().get_context_data(**kwargs)
         context['policy'] = get_object_or_404(Policy, number=self.kwargs['policy_number'])
+        context['success'] = self.request.GET.get('success', False)  # Check for success flag in GET params
         return context
 
     def form_valid(self, form):
@@ -58,9 +60,7 @@ class PolicyRequestFormView(LoginRequiredMixin, FormView):
         policy_request = form.save(commit=False)
         policy_request.policy = policy
         policy_request.save()
-        return super().form_valid(form)
 
-
-# Request success view: Displays a confirmation page after a successful form submission
-class RequestSuccessView(TemplateView):
-    template_name = "handbook/request_success.html"
+        # Redirect to the same page with success=True
+        success_url = f"{self.get_success_url()}?success=True"
+        return HttpResponseRedirect(success_url)

@@ -43,7 +43,8 @@ To start the application and run it locally, use the command:
 ```
 python manage.py runserver
 ```
-Once the server is running, you can access the app by visiting http://127.0.0.1:8000/ in your web browser.
+Once the server is running, you can access the app by visiting http://127.0.0.1:8000/handbook in your web browser.
+You can access the admin page by visiting http://127.0.0.1:8000/admin in your web browser.
 
 ## Features
 

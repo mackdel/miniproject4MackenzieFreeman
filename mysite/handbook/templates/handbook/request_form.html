@@ -1,17 +1,92 @@
-{% extends "handbook/base_generic.html" %}
+{% extends "handbook/base.html" %}
 
 {% block title %}
-    Form for {{ policy.number }} {{ policy.title }}
+    Submit a Question - {{ policy.number }} {{ policy.title }}
 {% endblock %}
 
 {% block content %}
-<h1>Submit a Question for Policy {{ policy.number }} - {{ policy.title }}</h1>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-8">
+            <!-- Header Section -->
+            <div class="text-center">
+                <h1 class="display-5 text-center mb-4">Submit a Question</h1>
+                <h2 class="h4 text-primary">Policy: {{ policy.number }} {{ policy.title }}</h2>
+            </div>
 
-<p>Fill out the form below to ask a question or request clarification regarding this policy.</p>
+            <p class="text-muted">Fill out the form below to ask a question or request clarification regarding this policy. Our team will review your submission and respond accordingly.</p>
 
-<form method="post" novalidate>
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="">Submit</button>
-</form>
+            <!-- Form Section -->
+            <form method="post" class="bg-light p-4 rounded shadow-sm needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_name" class="form-label">Name (Optional)</label>
+                    <input type="text" id="id_name" name="name" class="form-control" placeholder="Your Full Name">
+                </div>
+                <div class="mb-3">
+                    <label for="id_email" class="form-label">Email</label>
+                    <input type="email" id="id_email" name="email" class="form-control" placeholder="Your Email" required>
+                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="id_question" class="form-label">Question</label>
+                    <textarea id="id_question" name="question" class="form-control" placeholder="Your Question or Clarification" required></textarea>
+                    <div class="invalid-feedback">Please provide your question or clarification.</div>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="successModalLabel">Submission Successful</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Thank you for submitting your question for Policy <strong>{{ policy.number }}</strong> - <strong>{{ policy.title }}</strong>. Our team will review it and get back to you soon.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'handbook:policy_sections' %}" class="btn btn-secondary">Back to Policies</a>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Automatically show the success modal if the form submission was successful
+    {% if success %}
+    document.addEventListener("DOMContentLoaded", function () {
+        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        successModal.show();
+    });
+    {% endif %}
+
+    // Enable Bootstrap form validation
+    (function () {
+        'use strict';
+        // Fetch all forms with the 'needs-validation' class
+        var forms = document.querySelectorAll('.needs-validation');
+
+        // Loop over them and prevent submission if invalid
+        Array.prototype.slice.call(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
 {% endblock %}
