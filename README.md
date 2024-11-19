@@ -15,7 +15,7 @@ A handbook web app allowing users to view and request clarifications on company 
 
 You can install all required libraries using the following command:
 ```
-pip install -r requirements.txt
+pip install -r mysite/requirements.txt
 ```
 
 ### Setup Database
