@@ -13,9 +13,14 @@ A handbook web app allowing users to view and request clarifications on company 
 
 ### Dependencies
 
+Navigate to the mysite directory:
+```
+cd mysite
+```
+
 You can install all required libraries using the following command:
 ```
-pip install -r mysite/requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Setup Database
